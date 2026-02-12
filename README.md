@@ -2,6 +2,9 @@
 
 Install and manage add-ons that extend [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders). Provides a dedicated admin screen under **Media → Add-on Manager** for installing, activating, updating, deactivating, and deleting supported add-ons directly from GitHub releases.
 
+<img width="1454" height="711" alt="Screenshot of Add-On Manager" src="https://github.com/user-attachments/assets/7f99c541-7802-4b08-aa57-7b5dff256779" />
+
+
 ## Supported Add-ons
 
 | Add-on | Description |
