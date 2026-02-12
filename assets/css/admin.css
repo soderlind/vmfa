@@ -1,0 +1,87 @@
+/* Card grid — equal-height rows. */
+.vmfa-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	margin-top: 20px;
+}
+
+.vmfa-card {
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+.vmfa-card-top {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.vmfa-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.vmfa-card-header h3 {
+	margin: 0;
+	font-size: 14px;
+}
+
+.vmfa-card-actions {
+	display: flex;
+	gap: 6px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	flex-shrink: 0;
+}
+
+.vmfa-card-actions li {
+	margin: 0;
+}
+
+.vmfa-card-desc {
+	flex: 1 1 auto;
+	color: #50575e;
+	font-size: 13px;
+}
+
+.vmfa-card-desc p {
+	margin: 0 0 8px;
+}
+
+.vmfa-card-desc p:last-child {
+	margin-bottom: 0;
+}
+
+.vmfa-card-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 20px;
+	border-top: 1px solid #dcdcde;
+	background: #f6f7f7;
+}
+
+.vmfa-update-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	background: #fcf0f1;
+	border: 1px solid #d63638;
+	border-radius: 3px;
+	color: #d63638;
+	font-size: 12px;
+}
+
+@media screen and (max-width: 782px) {
+	.vmfa-grid {
+		grid-template-columns: 1fr;
+	}
+}

@@ -1,0 +1,54 @@
+name: On Release, Build release zip
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build release zip
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build plugin
+        run: |
+          composer install --no-dev --optimize-autoloader
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@b57d897cb5d60cb78b51a507f63fa184cfe35554 #0.7.6
+        with:
+          type: 'zip'
+          filename: 'vmfa.zip'
+          exclusions: >-
+            *.git* /*.github/* /*.vscode/* /*node_modules/* /*tests/* /*docs/*
+            composer.json composer.lock package.json package-lock.json
+            phpunit.xml phpunit.xml.dist phpcs.xml vitest.config.js i18n-map.json
+            .editorconfig .eslintignore .phpunit.result.cache .eslintrc.js .gitignore .gitattributes
+            *.log CHANGELOG.md README.md
+            !readme.txt !src/* !vendor/*
+
+      - name: Verify Archive Contents
+        run: |
+          echo "Listing vmfa.zip entries:"
+          unzip -l vmfa.zip || { echo "Failed to list zip contents"; exit 1; }
+          echo "Total files: $(unzip -l vmfa.zip | awk 'END{print $2}')"
+
+          # Verify Plugin Update Checker is included (required dependency)
+          if unzip -l vmfa.zip | grep -q "vendor/yahnis-elsts/plugin-update-checker"; then
+            echo "✓ Plugin Update Checker is included"
+          else
+            echo "✗ ERROR: Plugin Update Checker is missing from the release!"
+            exit 1
+          fi
+
+      - name: Release
+        uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda #v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: vmfa.zip
+          tag_name: ${{ github.event.release.tag_name }}

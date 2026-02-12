@@ -1,0 +1,40 @@
+{
+	"name": "soderlind/vmfa",
+	"description": "Install and manage add-ons that extend Virtual Media Folders.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Per Soderlind",
+			"homepage": "https://soderlind.no"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"VMFA\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=8.3",
+		"yahnis-elsts/plugin-update-checker": "^5.6"
+	},
+	"require-dev": {
+		"brain/monkey": "^2.6",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"mockery/mockery": "^1.6",
+		"pestphp/pest": "^4.0",
+		"wp-coding-standards/wpcs": "^3.0"
+	},
+	"scripts": {
+		"test": "pest",
+		"lint": "phpcs",
+		"lint:fix": "phpcbf"
+	},
+	"config": {
+		"allow-plugins": {
+			"pestphp/pest-plugin": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"sort-packages": true
+	}
+}
