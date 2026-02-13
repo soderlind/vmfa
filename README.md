@@ -1,9 +1,6 @@
 # Virtual Media Folders - Add-On Manager
 
-Install and manage add-ons that extend [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders). Provides a dedicated admin screen under **Media → Add-on Manager** for installing, activating, updating, deactivating, and deleting supported add-ons directly from GitHub releases.
-
-<img width="1454" height="711" alt="Screenshot of Add-On Manager" src="https://github.com/user-attachments/assets/7f99c541-7802-4b08-aa57-7b5dff256779" />
-
+Install and manage add-ons that extend [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/). Provides a dedicated admin screen under **Media → Add-on Manager** for installing, activating, updating, deactivating, and deleting supported add-ons directly from GitHub releases.
 
 ## Supported Add-ons
 
@@ -19,7 +16,7 @@ Install and manage add-ons that extend [Virtual Media Folders](https://github.co
 
 - WordPress 6.8+
 - PHP 8.3+
-- [Virtual Media Folders](https://github.com/soderlind/virtual-media-folders) (core plugin)
+- [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/) (core plugin)
 
 ## Installation
 
