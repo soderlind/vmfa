@@ -70,6 +70,25 @@
 	background: #f6f7f7;
 }
 
+.vmfa-card-bottom-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.vmfa-github-link {
+	display: flex;
+	align-items: center;
+	color: #50575e;
+	text-decoration: none;
+	transition: color 0.15s;
+}
+
+.vmfa-github-link:hover,
+.vmfa-github-link:focus {
+	color: #135e96;
+}
+
 .vmfa-update-badge {
 	display: inline-block;
 	padding: 2px 8px;

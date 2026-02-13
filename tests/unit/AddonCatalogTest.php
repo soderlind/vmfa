@@ -38,7 +38,7 @@ it( 'returns entries with required keys', function () {
 	$catalog = AddonCatalog::all();
 
 	foreach ( $catalog as $slug => $entry ) {
-		expect( $entry )->toHaveKeys( [ 'slug', 'title', 'description', 'repo_url', 'zip_url', 'plugin_file' ] );
+		expect( $entry )->toHaveKeys( [ 'slug', 'title', 'description', 'repo_url', 'zip_url', 'readme_url', 'plugin_file' ] );
 	}
 } );
 
@@ -47,6 +47,16 @@ it( 'builds correct repo_url for each entry', function () {
 
 	foreach ( $catalog as $slug => $entry ) {
 		expect( $entry[ 'repo_url' ] )->toBe( 'https://github.com/soderlind/' . $slug );
+	}
+} );
+
+it( 'builds correct readme_url for each entry', function () {
+	$catalog = AddonCatalog::all();
+
+	foreach ( $catalog as $slug => $entry ) {
+		expect( $entry[ 'readme_url' ] )->toBe(
+			'https://raw.githubusercontent.com/soderlind/' . $slug . '/main/readme.txt'
+		);
 	}
 } );
 

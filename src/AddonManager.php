@@ -33,6 +33,8 @@ final class AddonManager {
 		add_action( 'admin_menu', [ self::class, 'add_menu_page' ] );
 		add_action( 'admin_init', [ self::class, 'handle_actions' ] );
 		add_action( 'admin_enqueue_scripts', [ self::class, 'enqueue_assets' ] );
+		add_filter( 'plugins_api', [ self::class, 'inject_addon_info' ], 20, 3 );
+		add_action( 'wp_ajax_vmfa_addon_details', [ self::class, 'ajax_addon_details' ] );
 	}
 
 	/**
@@ -75,9 +77,11 @@ final class AddonManager {
 		wp_enqueue_style(
 			'vmfa-admin',
 			VMFA_URL . 'assets/css/admin.css',
-			[],
+			[ 'thickbox' ],
 			VMFA_VERSION
 		);
+
+		add_thickbox();
 	}
 
 	/**
@@ -216,14 +220,31 @@ final class AddonManager {
 							</div>
 						</div>
 						<div class="vmfa-card-bottom">
-							<a href="<?php echo esc_url( $addon[ 'repo_url' ] ); ?>" target="_blank" rel="noopener noreferrer">
-								<?php echo esc_html__( 'View on GitHub', 'vmfa' ); ?>
+							<div class="vmfa-card-bottom-left">
+								<?php
+								$details_url = add_query_arg(
+									[
+										'action'    => 'vmfa_addon_details',
+										'plugin'    => $addon[ 'slug' ],
+										'TB_iframe' => 'true',
+										'width'     => '772',
+										'height'    => '550',
+									],
+									admin_url( 'admin-ajax.php' )
+								);
+								?>
+								<a href="<?php echo esc_url( $details_url ); ?>" class="thickbox open-plugin-details-modal">
+									<?php echo esc_html__( 'View details', 'vmfa' ); ?>
+								</a>
+								<?php if ( $update_available ) : ?>
+									<span class="vmfa-update-badge">
+										<?php echo esc_html__( 'Update available', 'vmfa' ); ?>
+									</span>
+								<?php endif; ?>
+							</div>
+							<a href="<?php echo esc_url( $addon[ 'repo_url' ] ); ?>" target="_blank" rel="noopener noreferrer" class="vmfa-github-link" title="<?php echo esc_attr__( 'View on GitHub', 'vmfa' ); ?>">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
 							</a>
-							<?php if ( $update_available ) : ?>
-								<span class="vmfa-update-badge">
-									<?php echo esc_html__( 'Update available', 'vmfa' ); ?>
-								</span>
-							<?php endif; ?>
 						</div>
 					</div>
 				<?php endforeach; ?>
@@ -291,6 +312,245 @@ final class AddonManager {
 			</form>
 		</li>
 		<?php
+	}
+
+	/**
+	 * AJAX handler for the "View details" Thickbox modal.
+	 *
+	 * Delegates to WordPress core's install_plugin_information(),
+	 * which calls plugins_api() — intercepted by inject_addon_info() —
+	 * then renders the native plugin-information iframe.
+	 *
+	 * @return void
+	 */
+	public static function ajax_addon_details(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have permission to view add-on details.', 'vmfa' ) );
+		}
+
+		// Ensure hook_suffix is set so admin_enqueue_scripts callbacks
+		// receive a string, not null (prevents crashes in mu-plugins).
+		if ( ! isset( $GLOBALS['hook_suffix'] ) ) {
+			$GLOBALS['hook_suffix'] = '';
+		}
+
+		// Set a screen object so iframe_header() can call get_current_screen().
+		if ( ! function_exists( 'set_current_screen' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/screen.php';
+		}
+		set_current_screen();
+
+		// install_plugin_information() uses global $tab to build element IDs
+		// like #plugin-information-tabs and #plugin-information-content.
+		// Without this, the IDs become #-tabs / #-content and CSS won't match.
+		global $tab, $body_id;
+		$tab     = 'plugin-information';
+		$body_id = 'plugin-information'; // iframe_header() sets <body id="$body_id">; CSS targets #plugin-information .fyi etc.
+
+		if ( ! function_exists( 'install_plugin_information' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+		}
+
+		// Inject client-side tab switching so tab clicks don't reload the iframe.
+		add_action( 'admin_footer', [ __CLASS__, 'inline_tab_script' ] );
+
+		// install_plugin_information() reads slug from $_REQUEST['plugin'].
+		install_plugin_information();
+
+		exit;
+	}
+
+	/**
+	 * Print inline JS for client-side tab switching in the plugin details modal.
+	 *
+	 * All section <div>s are already rendered with display:none/block.
+	 * This script intercepts tab clicks to toggle visibility instantly
+	 * instead of reloading the iframe for each tab.
+	 *
+	 * @return void
+	 */
+	public static function inline_tab_script(): void {
+		?>
+		<script>
+		(function(){
+			var tabs = document.getElementById('plugin-information-tabs');
+			if ( ! tabs ) return;
+			tabs.addEventListener( 'click', function( e ) {
+				var link = e.target.closest('a');
+				if ( ! link ) return;
+				e.preventDefault();
+				var section = link.getAttribute('name');
+				if ( ! section ) return;
+				// Update tab active state.
+				var allTabs = tabs.querySelectorAll('a');
+				for ( var i = 0; i < allTabs.length; i++ ) {
+					allTabs[i].className = '';
+				}
+				link.className = 'current';
+				// Toggle section visibility.
+				var holder = document.getElementById('section-holder');
+				if ( ! holder ) return;
+				var sections = holder.querySelectorAll('.section');
+				for ( var j = 0; j < sections.length; j++ ) {
+					sections[j].style.display = 'none';
+				}
+				var target = document.getElementById('section-' + section);
+				if ( target ) target.style.display = 'block';
+			});
+		})();
+		</script>
+		<?php
+	}
+
+	/**
+	 * Intercept plugins_api for add-on slugs.
+	 *
+	 * Fetches the add-on's readme.txt from GitHub, parses it with
+	 * PucReadmeParser, and returns a stdClass that WordPress core's
+	 * install_plugin_information() renders natively.
+	 *
+	 * @param false|object|array $result The result object or array. Default false.
+	 * @param string             $action The type of information being requested.
+	 * @param object             $args   Plugin API arguments.
+	 * @return false|object
+	 */
+	public static function inject_addon_info( $result, $action, $args ) {
+		if ( 'plugin_information' !== $action ) {
+			return $result;
+		}
+
+		$slug = $args->slug ?? '';
+
+		$addon = AddonCatalog::get( $slug );
+		if ( ! $addon ) {
+			return $result;
+		}
+
+		$readme = self::fetch_readme( $addon );
+
+		$info               = new \stdClass();
+		$info->name         = html_entity_decode( $readme[ 'name' ] ?: $addon[ 'title' ], ENT_QUOTES, 'UTF-8' );
+		$info->slug         = $addon[ 'slug' ];
+		$info->version      = $readme[ 'stable_tag' ] ?: '';
+		$info->requires     = $readme[ 'requires_at_least' ] ?: '';
+		$info->tested       = self::normalize_tested( $readme[ 'tested_up_to' ] ?: '' );
+		$info->requires_php = $readme[ 'requires_php' ] ?: '';
+		$info->author       = '<a href="https://soderlind.no">Per Soderlind</a>';
+		$info->homepage     = $addon[ 'repo_url' ];
+		$info->external     = true;
+
+		$sections = array_merge( [ 'description' => '' ], $readme[ 'sections' ] ?? [] );
+		unset( $sections['screenshots'] );
+		$info->sections = $sections;
+
+		return $info;
+	}
+
+	/**
+	 * Fetch and parse the readme.txt for an add-on.
+	 *
+	 * @param array<string, string> $addon Add-on metadata.
+	 * @return array<string, mixed> Parsed readme data.
+	 */
+	private static function fetch_readme( array $addon ): array {
+		$transient_key = 'vmfa_readme_' . $addon[ 'slug' ];
+		$cached        = get_transient( $transient_key );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+
+		$response = wp_remote_get(
+			$addon[ 'readme_url' ],
+			[
+				'timeout'    => 10,
+				'user-agent' => 'Virtual-Media-Folders',
+			]
+		);
+
+		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+			return self::empty_readme();
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+		if ( empty( $body ) ) {
+			return self::empty_readme();
+		}
+
+		if ( ! class_exists( 'PucReadmeParser', false ) ) {
+			$parser_path = VMFA_PATH . 'vendor/yahnis-elsts/plugin-update-checker/vendor/PucReadmeParser.php';
+			if ( file_exists( $parser_path ) ) {
+				require_once $parser_path;
+			}
+		}
+
+		if ( ! class_exists( 'PucReadmeParser', false ) ) {
+			return self::empty_readme();
+		}
+
+		$parser = new \PucReadmeParser();
+		$parsed = $parser->parse_readme_contents( $body );
+
+		if ( ! is_array( $parsed ) || empty( $parsed ) ) {
+			return self::empty_readme();
+		}
+
+		set_transient( $transient_key, $parsed, 6 * HOUR_IN_SECONDS );
+
+		return $parsed;
+	}
+
+	/**
+	 * Return a minimal empty readme structure.
+	 *
+	 * @return array<string, mixed>
+	 */
+	private static function empty_readme(): array {
+		return [
+			'name'              => '',
+			'requires_at_least' => '',
+			'tested_up_to'      => '',
+			'requires_php'      => '',
+			'stable_tag'        => '',
+			'short_description' => '',
+			'sections'          => [],
+		];
+	}
+
+	/**
+	 * Normalise the "Tested up to" value so patch-level differences
+	 * don't trigger a false-positive "not tested" warning.
+	 *
+	 * WordPress core compares `get_bloginfo('version') <= $tested`
+	 * literally, so 6.9.1 > 6.9 ⇒ warning. If the readme says "6.9"
+	 * and the site runs 6.9.x, we return the full site version.
+	 *
+	 * @param string $tested The "Tested up to" value from readme.txt.
+	 * @return string Adjusted value.
+	 */
+	private static function normalize_tested( string $tested ): string {
+		if ( '' === $tested ) {
+			return '';
+		}
+
+		$wp_version = get_bloginfo( 'version' );
+
+		// Already an exact match or higher — nothing to do.
+		if ( version_compare( $wp_version, $tested, '<=' ) ) {
+			return $tested;
+		}
+
+		// Compare only major.minor (first two segments).
+		$tested_parts = explode( '.', $tested );
+		$wp_parts     = explode( '.', $wp_version );
+
+		$tested_minor = ( $tested_parts[0] ?? '0' ) . '.' . ( $tested_parts[1] ?? '0' );
+		$wp_minor     = ( $wp_parts[0] ?? '0' ) . '.' . ( $wp_parts[1] ?? '0' );
+
+		if ( $tested_minor === $wp_minor ) {
+			return $wp_version;
+		}
+
+		return $tested;
 	}
 
 	/**
