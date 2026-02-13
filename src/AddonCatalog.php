@@ -55,7 +55,7 @@ final class AddonCatalog {
 	/**
 	 * Get the full add-on catalog.
 	 *
-	 * @return array<string, array{slug: string, title: string, description: string, repo_url: string, zip_url: string, plugin_file: string}>
+	 * @return array<string, array{slug: string, title: string, description: string, repo_url: string, zip_url: string, readme_url: string, plugin_file: string}>
 	 */
 	public static function all(): array {
 		$catalog = [];
@@ -71,7 +71,7 @@ final class AddonCatalog {
 	 * Get a single add-on by slug.
 	 *
 	 * @param string $slug Add-on slug.
-	 * @return array{slug: string, title: string, description: string, repo_url: string, zip_url: string, plugin_file: string}|null
+	 * @return array{slug: string, title: string, description: string, repo_url: string, zip_url: string, readme_url: string, plugin_file: string}|null
 	 */
 	public static function get( string $slug ): ?array {
 		if ( ! isset( self::ITEMS[ $slug ] ) ) {
@@ -86,7 +86,7 @@ final class AddonCatalog {
 	 *
 	 * @param string                          $slug Add-on slug.
 	 * @param array{title: string, description: string} $item Item definition.
-	 * @return array{slug: string, title: string, description: string, repo_url: string, zip_url: string, plugin_file: string}
+	 * @return array{slug: string, title: string, description: string, repo_url: string, zip_url: string, readme_url: string, plugin_file: string}
 	 */
 	private static function build_entry( string $slug, array $item ): array {
 		return [
@@ -97,6 +97,7 @@ final class AddonCatalog {
 			'description' => __( $item[ 'description' ], 'vmfa' ),
 			'repo_url'    => self::GITHUB_BASE . '/' . $slug,
 			'zip_url'     => self::GITHUB_BASE . '/' . $slug . '/releases/latest/download/' . $slug . '.zip',
+			'readme_url'  => 'https://raw.githubusercontent.com/soderlind/' . $slug . '/main/readme.txt',
 			'plugin_file' => $slug . '/' . $slug . '.php',
 		];
 	}

@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Brain\Monkey\Actions;
+use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
 use VMFA\AddonManager;
 
@@ -36,6 +37,8 @@ it( 'registers admin hooks on init', function () {
 	Actions\expectAdded( 'admin_menu' )->once();
 	Actions\expectAdded( 'admin_init' )->once();
 	Actions\expectAdded( 'admin_enqueue_scripts' )->once();
+	Filters\expectAdded( 'plugins_api' )->once();
+	Actions\expectAdded( 'wp_ajax_vmfa_addon_details' )->once();
 
 	AddonManager::init();
 } );
@@ -45,7 +48,9 @@ it( 'registers admin hooks on init', function () {
 it( 'enqueues admin styles on the correct page', function () {
 	Functions\expect( 'wp_enqueue_style' )
 		->once()
-		->with( 'vmfa-admin', \Mockery::type( 'string' ), [], VMFA_VERSION );
+		->with( 'vmfa-admin', \Mockery::type( 'string' ), [ 'thickbox' ], VMFA_VERSION );
+
+	Functions\expect( 'add_thickbox' )->once();
 
 	AddonManager::enqueue_assets( 'media_page_vmfa-addons' );
 } );
@@ -289,4 +294,51 @@ it( 'renders error notice from GET params', function () {
 
 it( 'has the expected page slug constant', function () {
 	expect( AddonManager::PAGE_SLUG )->toBe( 'vmfa-addons' );
+} );
+
+// --- inject_addon_info() -----------------------------------------------------
+
+it( 'returns false for non-plugin_information action', function () {
+	$result = AddonManager::inject_addon_info( false, 'query_plugins', (object) [ 'slug' => 'vmfa-rules-engine' ] );
+
+	expect( $result )->toBeFalse();
+} );
+
+it( 'returns original result for unknown slug', function () {
+	$result = AddonManager::inject_addon_info( false, 'plugin_information', (object) [ 'slug' => 'unknown-plugin' ] );
+
+	expect( $result )->toBeFalse();
+} );
+
+it( 'returns stdClass for known add-on slug', function () {
+	Functions\when( 'get_transient' )->justReturn(
+		[
+			'name'              => 'Rules Engine',
+			'requires_at_least' => '6.8',
+			'tested_up_to'      => '6.9',
+			'requires_php'      => '8.3',
+			'stable_tag'        => '1.0.0',
+			'short_description' => 'Test description.',
+			'sections'          => [
+				'description' => '<p>Some description.</p>',
+				'changelog'   => '<p>Changelog content.</p>',
+			],
+		]
+	);
+
+	// normalize_tested() calls get_bloginfo to compare major.minor.
+	Functions\when( 'get_bloginfo' )->justReturn( '6.9.1' );
+
+	$result = AddonManager::inject_addon_info( false, 'plugin_information', (object) [ 'slug' => 'vmfa-rules-engine' ] );
+
+	expect( $result )->toBeObject();
+	expect( $result->name )->toBe( 'Rules Engine' );
+	expect( $result->slug )->toBe( 'vmfa-rules-engine' );
+	expect( $result->version )->toBe( '1.0.0' );
+	expect( $result->requires )->toBe( '6.8' );
+	// tested_up_to "6.9" is normalized to WP version "6.9.1" (same major.minor).
+	expect( $result->tested )->toBe( '6.9.1' );
+	expect( $result->requires_php )->toBe( '8.3' );
+	expect( $result->sections )->toHaveKey( 'description' );
+	expect( $result->sections )->toHaveKey( 'changelog' );
 } );

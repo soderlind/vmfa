@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+- Added: "View details" modal using WordPress core's native plugin information renderer.
+- Added: Client-side tab switching for instant navigation within the modal.
+- Added: Patch-level version normalization for "Tested up to" to prevent false compatibility warnings.
+- Removed: Activate/install button from the modal footer (managed from the card grid instead).
+- Removed: Screenshots tab from the modal.
+
 ## 0.2.0
 
 - Show update count badge on the Add-on Manager menu item (red bubble, same pattern as Editorial Workflow review count).
