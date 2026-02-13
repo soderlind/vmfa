@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+- Show update count badge on the Add-on Manager menu item (red bubble, same pattern as Editorial Workflow review count).
+
 ## 0.1.0
 
 - Initial release with add-on catalog and manager UI.

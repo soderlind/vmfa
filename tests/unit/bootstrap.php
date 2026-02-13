@@ -25,7 +25,7 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 
 // Plugin constants.
 if ( ! defined( 'VMFA_VERSION' ) ) {
-	define( 'VMFA_VERSION', '0.1.0' );
+	define( 'VMFA_VERSION', '0.2.0' );
 }
 if ( ! defined( 'VMFA_FILE' ) ) {
 	define( 'VMFA_FILE', dirname( __DIR__, 2 ) . '/vmfa.php' );
