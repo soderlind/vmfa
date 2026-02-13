@@ -1,0 +1,14 @@
+{
+	"name": "vmfa",
+	"version": "1.1.0",
+	"description": "Install and manage add-ons that extend Virtual Media Folders.",
+	"author": "Per Soderlind",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"i18n": "npm run i18n:make-pot && npm run i18n:update-po && npm run i18n:make-mo && npm run i18n:make-php",
+		"i18n:make-pot": "wp i18n make-pot . languages/vmfa.pot --exclude=node_modules,vendor,tests --domain=vmfa",
+		"i18n:update-po": "wp i18n update-po languages/vmfa.pot languages/",
+		"i18n:make-mo": "wp i18n make-mo languages/",
+		"i18n:make-php": "wp i18n make-php languages/"
+	}
+}

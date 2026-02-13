@@ -1,0 +1,167 @@
+# Copyright (C) 2026 Per Soderlind
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Virtual Media Folders - Add-On Manager 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vmfa\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-02-13T11:03:35+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: vmfa\n"
+
+#. Plugin Name of the plugin
+#: vmfa.php
+msgid "Virtual Media Folders - Add-On Manager"
+msgstr ""
+
+#. Description of the plugin
+#: vmfa.php
+#: src/AddonManager.php:172
+msgid "Install and manage add-ons that extend Virtual Media Folders."
+msgstr ""
+
+#. Author of the plugin
+#: vmfa.php
+msgid "Per Soderlind"
+msgstr ""
+
+#. Author URI of the plugin
+#: vmfa.php
+msgid "https://soderlind.no/"
+msgstr ""
+
+#: src/AddonManager.php:46
+msgid "Add-on Manager"
+msgstr ""
+
+#: src/AddonManager.php:58
+#: src/AddonManager.php:170
+msgid "Virtual Media Folders Add-ons"
+msgstr ""
+
+#: src/AddonManager.php:98
+msgid "You do not have permission to manage add-ons."
+msgstr ""
+
+#: src/AddonManager.php:108
+msgid "Update checks refreshed."
+msgstr ""
+
+#: src/AddonManager.php:114
+msgid "Unknown add-on."
+msgstr ""
+
+#: src/AddonManager.php:121
+msgid "installed"
+msgstr ""
+
+#: src/AddonManager.php:125
+msgid "activated"
+msgstr ""
+
+#: src/AddonManager.php:129
+msgid "updated"
+msgstr ""
+
+#: src/AddonManager.php:133
+msgid "deactivated"
+msgstr ""
+
+#: src/AddonManager.php:137
+msgid "deleted"
+msgstr ""
+
+#: src/AddonManager.php:140
+msgid "Unsupported action."
+msgstr ""
+
+#. translators: 1: Add-on title, 2: Action label.
+#: src/AddonManager.php:149
+#, php-format
+msgid "%1$s %2$s successfully."
+msgstr ""
+
+#: src/AddonManager.php:177
+msgid "Check updates now"
+msgstr ""
+
+#. translators: 1: Current status label.
+#: src/AddonManager.php:205
+#, php-format
+msgid "Status: %1$s"
+msgstr ""
+
+#. translators: 1: Installed version or dash, 2: Latest version or dash.
+#: src/AddonManager.php:214
+#, php-format
+msgid "Installed: %1$s | Latest: %2$s"
+msgstr ""
+
+#: src/AddonManager.php:237
+msgid "View details"
+msgstr ""
+
+#: src/AddonManager.php:241
+msgid "Update available"
+msgstr ""
+
+#: src/AddonManager.php:245
+msgid "View on GitHub"
+msgstr ""
+
+#: src/AddonManager.php:266
+msgid "Install"
+msgstr ""
+
+#: src/AddonManager.php:271
+msgid "Deactivate"
+msgstr ""
+
+#: src/AddonManager.php:273
+msgid "Activate"
+msgstr ""
+
+#: src/AddonManager.php:277
+msgid "Update"
+msgstr ""
+
+#: src/AddonManager.php:280
+msgid "Delete"
+msgstr ""
+
+#: src/AddonManager.php:280
+msgid "Are you sure you want to delete this add-on? This cannot be undone."
+msgstr ""
+
+#: src/AddonManager.php:328
+msgid "You do not have permission to view add-on details."
+msgstr ""
+
+#: src/AddonManager.php:580
+msgid "Active"
+msgstr ""
+
+#: src/AddonManager.php:580
+msgid "Installed"
+msgstr ""
+
+#: src/AddonManager.php:581
+msgid "Not installed"
+msgstr ""
+
+#: src/AddonManager.php:599
+msgid "Add-on is already installed."
+msgstr ""
+
+#: src/AddonManager.php:668
+msgid "Unable to delete the add-on."
+msgstr ""
+
+#: src/AddonManager.php:717
+msgid "Unable to install the add-on."
+msgstr ""

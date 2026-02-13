@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Added: Norwegian (nb_NO) translation.
+- Added: i18n build scripts via package.json.
+
 ## 1.0.1
 
 - Tested up to WordPress 6.9.

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Virtual Media Folders - Add-On Manager
  * Description: Install and manage add-ons that extend Virtual Media Folders.
- * Version: 1.0.1
+ * Version: 1.1.0
  * Requires at least: 6.8
  * Requires PHP: 8.3
  * Author: Per Soderlind
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'VMFA_VERSION', '1.0.1' );
+define( 'VMFA_VERSION', '1.1.0' );
 define( 'VMFA_FILE', __FILE__ );
 define( 'VMFA_PATH', __DIR__ . '/' );
 define( 'VMFA_URL', plugin_dir_url( __FILE__ ) );

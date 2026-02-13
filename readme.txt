@@ -4,7 +4,7 @@ Tags: media, folders, addons, manager
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 8.3
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added: Norwegian (nb_NO) translation.
+* Added: i18n build scripts via package.json.
 
 = 1.0.0 =
 * Added: "View details" modal using WordPress core's native plugin information renderer.
