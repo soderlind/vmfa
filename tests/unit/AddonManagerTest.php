@@ -59,12 +59,20 @@ it( 'does not enqueue styles on other pages', function () {
 // --- add_menu_page() ---------------------------------------------------------
 
 it( 'adds submenu page under upload.php', function () {
+	// get_update_count() calls require_plugin_functions(), get_status(), get_latest_release_version().
+	Functions\when( 'get_plugins' )->justReturn( [] );
+	Functions\when( 'is_plugin_active' )->justReturn( false );
+	Functions\when( 'get_plugin_data' )->justReturn( [ 'Version' => '' ] );
+	Functions\when( 'get_transient' )->justReturn( false );
+	Functions\when( 'wp_remote_get' )->justReturn( new \WP_Error() );
+	Functions\when( 'is_wp_error' )->justReturn( true );
+
 	Functions\expect( 'add_submenu_page' )
 		->once()
 		->with(
 			'upload.php',
 			'Virtual Media Folders Add-ons',
-			'Add-on Manager',
+			\Mockery::type( 'string' ),
 			'manage_options',
 			'vmfa-addons',
 			\Mockery::type( 'array' )

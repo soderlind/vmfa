@@ -4,7 +4,7 @@ Tags: media, folders, addons, manager
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.3
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 0.2.0 =
+* Added: Update count badge on the Add-on Manager menu item.
 
 = 0.1.0 =
 * Initial release with add-on catalog and manager UI.

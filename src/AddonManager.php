@@ -41,10 +41,20 @@ final class AddonManager {
 	 * @return void
 	 */
 	public static function add_menu_page(): void {
+		$menu_title = __( 'Add-on Manager', 'vmfa' );
+		$count      = self::get_update_count();
+
+		if ( $count > 0 ) {
+			$menu_title .= sprintf(
+				' <span class="awaiting-mod count-%1$d"><span class="pending-count">%1$d</span></span>',
+				$count
+			);
+		}
+
 		add_submenu_page(
 			'upload.php',
 			__( 'Virtual Media Folders Add-ons', 'vmfa' ),
-			__( 'Add-on Manager', 'vmfa' ),
+			$menu_title,
 			'manage_options',
 			self::PAGE_SLUG,
 			[ self::class, 'render_page' ]
@@ -507,6 +517,33 @@ final class AddonManager {
 	 */
 	private static function normalize_version( string $version ): string {
 		return ltrim( $version, 'vV' );
+	}
+
+	/**
+	 * Count installed add-ons that have an update available.
+	 *
+	 * @return int
+	 */
+	private static function get_update_count(): int {
+		self::require_plugin_functions();
+
+		$count = 0;
+
+		foreach ( AddonCatalog::all() as $addon ) {
+			$status = self::get_status( $addon );
+
+			if ( ! $status['installed'] || ! $status['version'] ) {
+				continue;
+			}
+
+			$latest = self::get_latest_release_version( $addon['slug'], $addon['repo_url'] );
+
+			if ( $latest && version_compare( $status['version'], self::normalize_version( $latest ), '<' ) ) {
+				++$count;
+			}
+		}
+
+		return $count;
 	}
 
 	/**
