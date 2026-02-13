@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Tested up to WordPress 6.9.
+
 ## 1.0.0
 
 - Added: "View details" modal using WordPress core's native plugin information renderer.
