@@ -16,6 +16,8 @@ Install and manage add-ons that extend [Virtual Media Folders](https://wordpress
 | [Media Cleanup](https://github.com/soderlind/vmfa-media-cleanup) | Tools to identify and clean up unused or duplicate media files. |
 | [Folder Exporter](https://github.com/soderlind/vmfa-folder-exporter) | Export folders (or subtrees) as ZIP archives with optional CSV manifests. |
 
+Each add-on card includes direct links to **report a bug** or **request a feature** via GitHub issue templates.
+
 ## Requirements
 
 - WordPress 6.8+

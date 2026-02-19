@@ -89,6 +89,11 @@
 	color: #135e96;
 }
 
+.vmfa-link-sep {
+	color: #dcdcde;
+	font-size: 13px;
+}
+
 .vmfa-update-badge {
 	display: inline-block;
 	padding: 2px 8px;
