@@ -236,6 +236,14 @@ final class AddonManager {
 								<a href="<?php echo esc_url( $details_url ); ?>" class="thickbox open-plugin-details-modal">
 									<?php echo esc_html__( 'View details', 'vmfa' ); ?>
 								</a>
+								<span class="vmfa-link-sep" aria-hidden="true">|</span>
+								<a href="<?php echo esc_url( $addon['repo_url'] . '/issues/new?template=bug-report.yml' ); ?>" target="_blank" rel="noopener noreferrer">
+									<?php echo esc_html__( 'Report bug', 'vmfa' ); ?>
+								</a>
+								<span class="vmfa-link-sep" aria-hidden="true">|</span>
+								<a href="<?php echo esc_url( $addon['repo_url'] . '/issues/new?template=feature-request.yml' ); ?>" target="_blank" rel="noopener noreferrer">
+									<?php echo esc_html__( 'Request feature', 'vmfa' ); ?>
+								</a>
 								<?php if ( $update_available ) : ?>
 									<span class="vmfa-update-badge">
 										<?php echo esc_html__( 'Update available', 'vmfa' ); ?>
