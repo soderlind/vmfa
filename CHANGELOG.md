@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Updated: Norwegian (nb_NO) translations for new issue-link strings.
+
 ## 1.2.0
 
 - Added: "Report bug" and "Request feature" links per add-on card, linking directly to GitHub issue templates.
