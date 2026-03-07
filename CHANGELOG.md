@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.3
+
+### Security
+
+- Updated dependencies.
+
 ## 1.2.2
 
 - Changed: Tested up to WordPress 7.0
