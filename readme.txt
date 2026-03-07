@@ -2,9 +2,9 @@
 Contributors: soderlind
 Tags: media, folders, addons, manager
 Requires at least: 6.8
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.2.2 =
+* Changed: Tested up to WordPress 7.0
 
 = 1.2.1 =
 * Updated: Norwegian (nb_NO) translations for new issue-link strings.

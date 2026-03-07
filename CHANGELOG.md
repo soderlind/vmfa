@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+- Changed: Tested up to WordPress 7.0
+
 ## 1.2.1
 
 - Updated: Norwegian (nb_NO) translations for new issue-link strings.
