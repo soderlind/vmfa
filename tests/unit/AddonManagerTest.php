@@ -185,6 +185,10 @@ it( 'returns null when GitHub API returns error', function () {
 
 	Functions\when( 'is_wp_error' )->alias( fn( $thing ) => $thing instanceof \WP_Error );
 
+	Functions\expect( 'set_transient' )
+		->once()
+		->with( 'vmfa_addon_release_vmfa-rules-engine', '', 15 * MINUTE_IN_SECONDS );
+
 	$method = new ReflectionMethod( AddonManager::class, 'get_latest_release_version' );
 	$result = $method->invoke( null, 'vmfa-rules-engine', 'https://github.com/soderlind/vmfa-rules-engine' );
 
@@ -205,6 +209,10 @@ it( 'returns null when GitHub API returns non-200 status', function () {
 	Functions\expect( 'wp_remote_retrieve_response_code' )
 		->once()
 		->andReturn( 404 );
+
+	Functions\expect( 'set_transient' )
+		->once()
+		->with( 'vmfa_addon_release_vmfa-rules-engine', '', 15 * MINUTE_IN_SECONDS );
 
 	$method = new ReflectionMethod( AddonManager::class, 'get_latest_release_version' );
 	$result = $method->invoke( null, 'vmfa-rules-engine', 'https://github.com/soderlind/vmfa-rules-engine' );

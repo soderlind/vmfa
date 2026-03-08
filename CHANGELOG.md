@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.4
+
+### Fixed
+
+- Fixed: Cache failed GitHub release lookups for 15 minutes to prevent hitting unauthenticated API rate limit (60/hr).
+
 ## 1.2.3
 
 ### Security

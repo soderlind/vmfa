@@ -23,6 +23,10 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 	define( 'HOUR_IN_SECONDS', 3600 );
 }
 
+if ( ! defined( 'MINUTE_IN_SECONDS' ) ) {
+	define( 'MINUTE_IN_SECONDS', 60 );
+}
+
 // Plugin constants.
 if ( ! defined( 'VMFA_VERSION' ) ) {
 	define( 'VMFA_VERSION', '1.0.0' );
