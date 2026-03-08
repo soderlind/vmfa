@@ -1,0 +1,39 @@
+/**
+ * WP 7.0+ admin compatibility overrides for VMFA Add-on Manager.
+ *
+ * Loaded only on WordPress 7.0+ to align with the "Modern" default color
+ * scheme and the new design tokens.
+ *
+ * @since 0.3.0
+ * @package VMFA
+ */
+
+/* ==========================================================================
+   Theme color: use CSS custom properties from wp-base-styles
+   ========================================================================== */
+
+/* GitHub link hover */
+.vmfa-github-link:hover,
+.vmfa-github-link:focus {
+	color: var(--wp-admin-theme-color-darker-20);
+}
+
+/* ==========================================================================
+   Design-token alignment: backgrounds & borders
+   ========================================================================== */
+
+/* Card border */
+.vmfa-card {
+	border-color: #ddd;
+}
+
+/* Card footer */
+.vmfa-card-bottom {
+	background: #f0f0f0;
+	border-top-color: #ddd;
+}
+
+/* Link separator */
+.vmfa-link-sep {
+	color: #ddd;
+}

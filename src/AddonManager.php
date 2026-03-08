@@ -81,6 +81,16 @@ final class AddonManager {
 			VMFA_VERSION
 		);
 
+		// WP 7+ design-token overrides.
+		if ( function_exists( 'vmfo_is_wp7' ) && vmfo_is_wp7() ) {
+			wp_enqueue_style(
+				'vmfa-admin-wp7',
+				VMFA_URL . 'assets/css/wp7-compat.css',
+				[ 'vmfa-admin', 'wp-base-styles' ],
+				VMFA_VERSION
+			);
+		}
+
 		add_thickbox();
 	}
 
