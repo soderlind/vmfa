@@ -740,8 +740,8 @@ final class AddonManager {
 	private static function get_latest_release_version( string $slug, string $repo_url ): ?string {
 		$transient_key = 'vmfa_addon_release_' . $slug;
 		$cached        = get_transient( $transient_key );
-		if ( is_string( $cached ) && $cached !== '' ) {
-			return $cached;
+		if ( is_string( $cached ) ) {
+			return '' === $cached ? null : $cached;
 		}
 
 		$api_url = sprintf( 'https://api.github.com/repos/%s/releases/latest', trim( str_replace( 'https://github.com/', '', $repo_url ), '/' ) );
@@ -758,16 +758,19 @@ final class AddonManager {
 		);
 
 		if ( is_wp_error( $response ) ) {
+			set_transient( $transient_key, '', 15 * MINUTE_IN_SECONDS );
 			return null;
 		}
 
 		$code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $code ) {
+			set_transient( $transient_key, '', 15 * MINUTE_IN_SECONDS );
 			return null;
 		}
 
 		$body = json_decode( wp_remote_retrieve_body( $response ), true );
 		if ( ! is_array( $body ) || empty( $body[ 'tag_name' ] ) ) {
+			set_transient( $transient_key, '', 15 * MINUTE_IN_SECONDS );
 			return null;
 		}
 
