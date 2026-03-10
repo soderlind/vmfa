@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'soderlind/vmfa',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '90a1974f750ddbe8a5926b215c54c9cffbd71c3b',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -476,9 +476,9 @@
             'dev_requirement' => true,
         ),
         'soderlind/vmfa' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '90a1974f750ddbe8a5926b215c54c9cffbd71c3b',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
