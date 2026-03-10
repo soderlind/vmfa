@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0
+
+### Added
+
+- WP 7.0+ design-token style overrides for the add-on manager admin page
+
+### Fixed
+
+- Cache failed GitHub release lookups as empty string to avoid repeated null transient misses
+
 ## 1.2.4
 
 ### Fixed
