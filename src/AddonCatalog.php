@@ -46,6 +46,10 @@ final class AddonCatalog {
 			'title'       => 'Media Cleanup',
 			'description' => 'Tools to identify and clean up unused or duplicate media files.',
 		],
+		'vmfa-multi-folder'       => [
+			'title'       => 'Multi-Folder',
+			'description' => 'Place media in multiple folders simultaneously with folder chips, bulk add, remove badges, and Alt+drag copy.',
+		],
 		'vmfa-rules-engine'       => [
 			'title'       => 'Rules Engine',
 			'description' => 'Rule-based automatic folder assignment for media uploads, based on metadata, file type, or other criteria.',
