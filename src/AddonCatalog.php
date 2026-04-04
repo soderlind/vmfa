@@ -46,6 +46,10 @@ final class AddonCatalog {
 			'title'       => 'Media Cleanup',
 			'description' => 'Tools to identify and clean up unused or duplicate media files.',
 		],
+		'vmfa-migrate'            => [
+			'title'       => 'Migrate',
+			'description' => 'Import folders and assignments from Enhanced Media Library, FileBird, Real Media Library, HappyFiles, WP Media Folder, Media Library Assistant, and CatFolders.',
+		],
 		'vmfa-rules-engine'       => [
 			'title'       => 'Rules Engine',
 			'description' => 'Rule-based automatic folder assignment for media uploads, based on metadata, file type, or other criteria.',
