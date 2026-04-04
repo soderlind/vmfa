@@ -4,7 +4,7 @@ Tags: media, folders, addons, manager
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.4.0 =
+* Added: Migrate add-on to the catalog — import folders from Enhanced Media Library, FileBird, Real Media Library, HappyFiles, WP Media Folder, Media Library Assistant, and CatFolders.
 
 = 1.3.0 =
 * Added: WP 7.0+ design-token style overrides for the add-on manager admin page
