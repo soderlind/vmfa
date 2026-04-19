@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0
+
+### Added
+
+- AI Ability add-on to the catalog — registers MCP tools for AI agents via WordPress Abilities API
+
 ## 1.4.0
 
 ### Added

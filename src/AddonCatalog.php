@@ -30,6 +30,10 @@ final class AddonCatalog {
 	 * @var array<string, array{title: string, description: string}>
 	 */
 	private const ITEMS = [
+		'vmfa-ai-ability'         => [
+			'title'       => 'AI Ability',
+			'description' => 'Registers MCP tools (vmfo/list-folders, vmfo/create-folder, vmfo/add-to-folder) for AI agents via the WordPress Abilities API.',
+		],
 		'vmfa-ai-organizer'       => [
 			'title'       => 'AI Organizer',
 			'description' => 'Uses vision-capable AI models to analyze actual image content and automatically organize your media library into virtual folders. This add-on requires an API key from a supported AI service provider, or a local LLM.',
