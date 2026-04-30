@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.1
+
+### Changed
+
+- Updated Rules Engine add-on description to mention EXIF and IPTC condition matchers
+
 ## 1.5.0
 
 ### Added

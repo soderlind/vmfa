@@ -56,7 +56,7 @@ final class AddonCatalog {
 		],
 		'vmfa-rules-engine'       => [
 			'title'       => 'Rules Engine',
-			'description' => 'Rule-based automatic folder assignment for media uploads, based on metadata, file type, or other criteria.',
+			'description' => 'Rule-based automatic folder assignment for media uploads, based on metadata, file type, EXIF or IPTC data. Define rules to automatically assign folders based on criteria like file type, dimensions, camera model, keywords, and more.',
 		],
 	];
 
