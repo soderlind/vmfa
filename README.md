@@ -2,9 +2,7 @@
 
 Install and manage add-ons that extend [Virtual Media Folders](https://wordpress.org/plugins/virtual-media-folders/). Provides a dedicated admin screen under **Media → Add-on Manager** for installing, activating, updating, deactivating, and deleting supported add-ons directly from GitHub releases.
 
-
-<img width="1721" height="849" alt="Screenshot 2026-02-19 at 10 09 25" src="https://github.com/user-attachments/assets/d11a497a-37e8-4aa2-97ab-169790327050" />
-
+<img width="1728" height="871" alt="Screenshot 2026-05-07 at 19 50 27" src="https://github.com/user-attachments/assets/b33cbd23-a74a-4190-986c-beb28c9fdcf5" />
 
 ## Supported Add-ons
 
