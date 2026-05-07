@@ -14,6 +14,7 @@ Install and manage add-ons that extend [Virtual Media Folders](https://wordpress
 | [Editorial Workflow](https://github.com/soderlind/vmfa-editorial-workflow) | Role-based folder access, move restrictions, and Inbox workflow. |
 | [Media Cleanup](https://github.com/soderlind/vmfa-media-cleanup) | Tools to identify and clean up unused or duplicate media files. |
 | [Folder Exporter](https://github.com/soderlind/vmfa-folder-exporter) | Export folders (or subtrees) as ZIP archives with optional CSV manifests. |
+| [Migrate](https://github.com/soderlind/vmfa-migrate) | Import folders and assignments from Enhanced Media Library, FileBird, Real Media Library, HappyFiles, WP Media Folder, Media Library Assistant, and CatFolders. |
 
 Each add-on card includes direct links to **report a bug** or **request a feature** via GitHub issue templates.
 
