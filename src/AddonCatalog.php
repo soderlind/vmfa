@@ -32,7 +32,7 @@ final class AddonCatalog {
 	private const ITEMS = [
 		'vmfa-ai-ability'         => [
 			'title'       => 'AI Ability',
-			'description' => 'Registers MCP tools (vmfo/list-folders, vmfo/create-folder, vmfo/add-to-folder) for AI agents via the WordPress Abilities API.',
+			'description' => 'Exposes folder management, rules automation, media cleanup, ZIP export, and AI Organizer workflows as MCP-ready WordPress Abilities API tools for AI agents.',
 		],
 		'vmfa-ai-organizer'       => [
 			'title'       => 'AI Organizer',
