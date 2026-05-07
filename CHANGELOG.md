@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2
+
+### Changed
+
+- Updated AI Ability add-on description to reflect all MCP-ready abilities and add-on workflows
+
 ## 1.5.1
 
 ### Changed

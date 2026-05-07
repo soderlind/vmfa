@@ -10,7 +10,7 @@ Install and manage add-ons that extend [Virtual Media Folders](https://wordpress
 
 | Add-on | Description |
 |--------|-------------|
-| [AI Ability](https://github.com/soderlind/vmfa-ai-ability) | Registers MCP tools (`vmfo/list-folders`, `vmfo/create-folder`, `vmfo/add-to-folder`) for AI agents via the WordPress Abilities API. |
+| [AI Ability](https://github.com/soderlind/vmfa-ai-ability) | Exposes folder management, rules automation, media cleanup, ZIP export, and AI Organizer workflows as MCP-ready WordPress Abilities API tools for AI agents. |
 | [AI Organizer](https://github.com/soderlind/vmfa-ai-organizer) | Uses vision-capable AI models to analyze image content and automatically organize your media library into virtual folders. |
 | [Rules Engine](https://github.com/soderlind/vmfa-rules-engine) | Rule-based automatic folder assignment for media uploads, based on metadata, file type, EXIF or IPTC data. |
 | [Editorial Workflow](https://github.com/soderlind/vmfa-editorial-workflow) | Role-based folder access, move restrictions, and Inbox workflow. |
