@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.3
+
+### Fixed
+
+- Add-on installation now correctly renames extracted directories, preventing discovery issues and duplicate installs
+
 ## 1.5.2
 
 ### Changed

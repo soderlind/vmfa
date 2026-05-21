@@ -711,6 +711,28 @@ final class AddonManager {
 		$skin     = new \Automatic_Upgrader_Skin();
 		$upgrader = new \Plugin_Upgrader( $skin );
 
+		// Extract expected slug from plugin_file (e.g., "vmfa-rules-engine/vmfa-rules-engine.php" → "vmfa-rules-engine").
+		$expected_slug = dirname( $plugin_file );
+
+		// Rename the extracted directory to the expected slug.
+		// GitHub zips often contain folders with hashes or branch names.
+		$rename_filter = static function ( string $source, string $remote_source ) use ( $expected_slug ): string {
+			global $wp_filesystem;
+			$new_source = trailingslashit( dirname( $source ) ) . $expected_slug . '/';
+
+			// Only rename if the source differs from the expected.
+			if ( trailingslashit( $source ) !== $new_source && $wp_filesystem->exists( $source ) ) {
+				// Remove existing target directory if it exists (prevents conflicts).
+				if ( $wp_filesystem->exists( $new_source ) ) {
+					$wp_filesystem->delete( $new_source, true );
+				}
+				$wp_filesystem->move( $source, $new_source );
+			}
+
+			return $new_source;
+		};
+		add_filter( 'upgrader_source_selection', $rename_filter, 10, 2 );
+
 		if ( $overwrite ) {
 			add_filter( 'upgrader_package_options', static function ( array $options ) use ( $plugin_file ): array {
 				$options[ 'clear_destination' ]           = true;
@@ -721,6 +743,9 @@ final class AddonManager {
 		}
 
 		$result = $upgrader->install( $zip_url );
+
+		// Remove the rename filter to avoid affecting other plugin installations.
+		remove_filter( 'upgrader_source_selection', $rename_filter, 10 );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
