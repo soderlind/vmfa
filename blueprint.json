@@ -1,0 +1,52 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "Virtual Media Folders",
+		"author": "bph",
+		"description": "Virtual folder organization and smart management for the WordPress Media Library.",
+		"categories": [
+			"Plugins",
+			"Media"
+		]
+	},
+	"landingPage": "/wp-admin/admin.php?page=vmfa-addons",
+	"steps": [
+		{
+			"step": "importWxr",
+			"file": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/wordpress/blueprints/trunk/blueprints/tt5-demo/tt5-demo-content.xml"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "virtual-media-folders"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github.com/soderlind/vmfa/releases/latest/download/vmfa.zip"
+			}
+		},
+		{
+			"step": "activatePlugin",
+			"pluginPath": "vmfa/vmfa.php"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once 'wordpress/wp-load.php'; wp_insert_term('Photos', 'vmfo_folder'); wp_insert_term('Videos', 'vmfo_folder'); wp_insert_term('Documentation', 'vmfo_folder'); $photos = get_term_by('slug', 'photos', 'vmfo_folder'); if ($photos) { wp_insert_term('Vacation 2025', 'vmfo_folder', array('parent' => $photos->term_id)); } ?>"
+		}
+	],
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "latest"
+	},
+	"login": true
+}
