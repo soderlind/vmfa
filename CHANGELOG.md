@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.4
+
+### Changed
+
+- Renamed "Add-on Manager" menu to "VMF Add-ons" for consistency.
+- Moved VMF Add-ons menu to bottom of Media submenu (position 901).
+
 ## 1.5.3
 
 ### Fixed

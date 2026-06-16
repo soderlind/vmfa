@@ -4,7 +4,7 @@ Tags: media, folders, addons, manager
 Requires at least: 6.8
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.5.4 =
+* Changed: Renamed "Add-on Manager" menu to "VMF Add-ons" for consistency.
+* Changed: Moved VMF Add-ons menu to bottom of Media submenu.
 
 = 1.5.3 =
 * Fixed: Add-on installation now correctly renames extracted directories, preventing discovery issues and duplicate installs.

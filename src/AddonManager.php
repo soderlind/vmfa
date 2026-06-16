@@ -43,7 +43,7 @@ final class AddonManager {
 	 * @return void
 	 */
 	public static function add_menu_page(): void {
-		$menu_title = __( 'Add-on Manager', 'vmfa' );
+		$menu_title = __( 'VMF Add-ons', 'vmfa' );
 		$count      = self::get_update_count();
 
 		if ( $count > 0 ) {
@@ -59,7 +59,8 @@ final class AddonManager {
 			$menu_title,
 			'manage_options',
 			self::PAGE_SLUG,
-			[ self::class, 'render_page' ]
+			[ self::class, 'render_page' ],
+			901
 		);
 	}
 
