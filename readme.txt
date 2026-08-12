@@ -2,9 +2,9 @@
 Contributors: soderlind
 Tags: media, folders, addons, manager
 Requires at least: 6.8
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.5.5 =
+* Added: Search add-on (vmfa-search) to the catalog — typo-tolerant Media Library search powered by Loupe.
+* Changed: Tested up to WordPress 7.1.
 
 = 1.5.4 =
 * Changed: Renamed "Add-on Manager" menu to "VMF Add-ons" for consistency.

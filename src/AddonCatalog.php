@@ -58,6 +58,10 @@ final class AddonCatalog {
 			'title'       => 'Rules Engine',
 			'description' => 'Rule-based automatic folder assignment for media uploads, based on metadata, file type, EXIF or IPTC data. Define rules to automatically assign folders based on criteria like file type, dimensions, camera model, keywords, and more.',
 		],
+		'vmfa-search'             => [
+			'title'       => 'Search',
+			'description' => 'Fast, typo-tolerant search for the Media Library, powered by the Loupe Search engine. Upgrades the native Media Library search field. Requires the Loupe Search plugin.',
+		],
 	];
 
 	/**
