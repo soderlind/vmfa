@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.5.5
+
+### Added
+
+- Search add-on (`vmfa-search`) in the add-on catalog — typo-tolerant Media Library search powered by Loupe.
+
+### Changed
+
+- Tested up to WordPress 7.1.
+
 ## 1.5.4
 
 ### Changed
