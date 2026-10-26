@@ -75,22 +75,17 @@ final class AddonManager {
 			return;
 		}
 
+		$style_deps = [ 'thickbox' ];
+		if ( wp_style_is( 'vmfo-tokens', 'registered' ) ) {
+			$style_deps[] = 'vmfo-tokens';
+		}
+
 		wp_enqueue_style(
 			'vmfa-admin',
 			VMFA_URL . 'assets/css/admin.css',
-			[ 'thickbox' ],
+			$style_deps,
 			VMFA_VERSION
 		);
-
-		// WP 7+ design-token overrides.
-		if ( function_exists( 'vmfo_is_wp7' ) && vmfo_is_wp7() ) {
-			wp_enqueue_style(
-				'vmfa-admin-wp7',
-				VMFA_URL . 'assets/css/wp7-compat.css',
-				[ 'vmfa-admin', 'wp-base-styles' ],
-				VMFA_VERSION
-			);
-		}
 
 		add_thickbox();
 	}

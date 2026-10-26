@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Styles use WordPress Design System (`--wpds-*`) tokens, so the UI follows WordPress 7.0+ styling automatically. With Virtual Media Folders 2.2.0+ on WordPress 6.8–6.9, the classic admin palette is used.
+- Every token has an inline WP 7 fallback value, so the add-on manager still renders correctly with Virtual Media Folders < 2.2.0 on WordPress < 7.
+- Accent colors follow the admin color scheme on all supported WordPress versions.
+- The admin stylesheet depends on the `vmfo-tokens` style when Virtual Media Folders registers it.
+
+### Removed
+
+- Separate WordPress 7 override stylesheet (`assets/css/wp7-compat.css`).
+
 ## 1.5.5
 
 ### Added
