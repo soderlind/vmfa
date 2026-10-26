@@ -4,7 +4,7 @@ Tags: media, folders, addons, manager
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,12 @@ It lets you install add-ons and then activate them manually.
 Update checks use the latest GitHub releases for each supported add-on.
 
 == Changelog ==
+
+= 1.6.0 =
+* Changed: Styles use WordPress Design System tokens, so the UI follows WordPress 7 styling. On WordPress 6.8–6.9 with Virtual Media Folders 2.2.0+, the classic admin palette is used.
+* Changed: Built-in token fallbacks keep the add-on looking right with older Virtual Media Folders versions.
+* Changed: Accent colors follow the admin color scheme.
+* Removed: Separate WordPress 7 override stylesheet.
 
 = 1.5.5 =
 * Added: Search add-on (vmfa-search) to the catalog — typo-tolerant Media Library search powered by Loupe.
