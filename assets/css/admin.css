@@ -84,11 +84,6 @@
 	transition: color 0.15s;
 }
 
-.vmfa-github-link:hover,
-.vmfa-github-link:focus {
-	color: var(--wp-admin-theme-color-darker-20, #135e96);
-}
-
 .vmfa-link-sep {
 	color: var(--wpds-color-stroke-surface-neutral, #dbdbdb);
 	font-size: 13px;
