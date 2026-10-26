@@ -9,9 +9,9 @@
 .vmfa-card {
 	display: flex;
 	flex-direction: column;
-	background: #fff;
-	border: 1px solid #dcdcde;
-	border-radius: 4px;
+	background: var(--wpds-color-background-surface-neutral-strong, #fff);
+	border: 1px solid var(--wpds-color-stroke-surface-neutral, #dbdbdb);
+	border-radius: var(--wpds-border-radius-md, 4px);
 }
 
 .vmfa-card-top {
@@ -49,7 +49,7 @@
 
 .vmfa-card-desc {
 	flex: 1 1 auto;
-	color: #50575e;
+	color: var(--wpds-color-foreground-content-neutral-weak, #707070);
 	font-size: 13px;
 }
 
@@ -66,8 +66,8 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 12px 20px;
-	border-top: 1px solid #dcdcde;
-	background: #f6f7f7;
+	border-top: 1px solid var(--wpds-color-stroke-surface-neutral, #dbdbdb);
+	background: var(--wpds-color-background-surface-neutral-weak, #f4f4f4);
 }
 
 .vmfa-card-bottom-left {
@@ -79,28 +79,23 @@
 .vmfa-github-link {
 	display: flex;
 	align-items: center;
-	color: #50575e;
+	color: var(--wpds-color-foreground-interactive-neutral-weak, #707070);
 	text-decoration: none;
 	transition: color 0.15s;
 }
 
-.vmfa-github-link:hover,
-.vmfa-github-link:focus {
-	color: #135e96;
-}
-
 .vmfa-link-sep {
-	color: #dcdcde;
+	color: var(--wpds-color-stroke-surface-neutral, #dbdbdb);
 	font-size: 13px;
 }
 
 .vmfa-update-badge {
 	display: inline-block;
 	padding: 2px 8px;
-	background: #fcf0f1;
-	border: 1px solid #d63638;
-	border-radius: 3px;
-	color: #d63638;
+	background: var(--wpds-color-background-surface-error-weak, #fff6f5);
+	border: 1px solid var(--wpds-color-stroke-surface-error-strong, #cc1818);
+	border-radius: var(--wpds-border-radius-sm, 2px);
+	color: var(--wpds-color-foreground-content-error-weak, #cc1818);
 	font-size: 12px;
 }
 

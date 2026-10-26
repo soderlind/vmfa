@@ -46,9 +46,26 @@ it( 'registers admin hooks on init', function () {
 // --- enqueue_assets() --------------------------------------------------------
 
 it( 'enqueues admin styles on the correct page', function () {
+	Functions\when( 'wp_style_is' )->justReturn( false );
+
 	Functions\expect( 'wp_enqueue_style' )
 		->once()
 		->with( 'vmfa-admin', \Mockery::type( 'string' ), [ 'thickbox' ], VMFA_VERSION );
+
+	Functions\expect( 'add_thickbox' )->once();
+
+	AddonManager::enqueue_assets( 'media_page_vmfa-addons' );
+} );
+
+it( 'adds the vmfo-tokens dependency when it is registered', function () {
+	Functions\expect( 'wp_style_is' )
+		->once()
+		->with( 'vmfo-tokens', 'registered' )
+		->andReturn( true );
+
+	Functions\expect( 'wp_enqueue_style' )
+		->once()
+		->with( 'vmfa-admin', \Mockery::type( 'string' ), [ 'thickbox', 'vmfo-tokens' ], VMFA_VERSION );
 
 	Functions\expect( 'add_thickbox' )->once();
 
